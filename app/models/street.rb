@@ -1,4 +1,4 @@
-class Street < ApplicationRecord
+class Street < ActiveRecord::Base
   has_many :commune_streets, dependent: :destroy
   has_many :communes, through: :commune_streets
 
