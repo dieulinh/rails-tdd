@@ -19,9 +19,14 @@ class Intercommunality < ActiveRecord::Base
     end
   end
 
+  def population
+    communes.pluck(:population).reduce(0, :+)
+  end
+
   private
 
   def generate_slug
+    return unless self.name
     tmp_slug = self.name.gsub(/é/,'e').downcase.gsub('metropole','').split(' ')
     tmp_slug.push('metropole') unless tmp_slug.include?('metropole')
     self.slug = tmp_slug.join('-')
